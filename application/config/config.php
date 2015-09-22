@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/minibank_2/';
+$config['base_url']	= 'http://localhost/SiBAMS/';
 
 /*
 |--------------------------------------------------------------------------

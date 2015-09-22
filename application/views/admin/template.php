@@ -97,6 +97,32 @@
         <body>
             <!-- Static navbar -->
 			<div class="navbar navbar-default navbar-fixed-top">
+			  <div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="<?php echo site_url('dashboard');?>">SiBAMS</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+					<form class="navbar-form navbar-right">
+						<div class="navbar-header">
+							<button type="button" class="btn btn-info" disabled>
+								<?php 
+									$session_id = $this->session->userdata('username');
+									echo "hai, "."<strong>".$session_id."</strong>";
+								?>
+							</button>
+						</div>
+					</form>
+				</div><!--/.navbar-collapse -->
+			  </div>
+			</nav>
+			</div>
+			<!--<div class="navbar navbar-default navbar-fixed-top">
 				<div class="container">
 					<a class="navbar-brand" href="<?php echo site_url('web');?>">
 						<img src="<?php echo base_url('assets/dolar.png');?>" width='30' height='30'/>
@@ -110,7 +136,7 @@
 						<a class="navbar-brand" href="<?php echo site_url('dashboard');?>">Bank Mini - jalan Panglima Polim No. 50</a>
 					</div>
 				</div>
-			</div>
+			</div>-->
             <div class="container">
                 <div class="row">
 					<!--menu kiri-->
