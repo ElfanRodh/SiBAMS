@@ -2,21 +2,19 @@
 	<!--panel header-->
 	<div class="panel-heading">
 		<h4 class="panel-title">
-			<span class="glyphicon glyphicon-star-empty"/></span> 
-			<a href="<?php echo site_url('guru');?>"> <strong>Guru Aktif </strong></a>
+			<span class="glyphicon glyphicon-user"/> </span> <a href="<?php echo site_url('siswa');?>"> <strong>Siswa </strong></a>
 		</h4>
     </div>
 	
 	<!--bawah panel / tambah dan cari-->
 	<div class="well well-sm">
-		<a href="<?php echo site_url('guru/tambah');?>" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Tambah</a>
-		<a href="<?php echo site_url('guru/nonaktif');?>" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Lihat Data Nonaktif</a>
-		<form class="navbar-form navbar-right" role="search" action="<?php echo site_url('guru/cari');?>" method="post">
+		<a href="<?php echo site_url('siswa/tambah');?>" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Tambah</a>
+		<form class="navbar-form navbar-right" role="search" action="<?php echo site_url('siswa/cari');?>" method="post">
 			<div class="form-group">
-				<label>Cari Guru</label>
-				<input type="text" class="form-control" placeholder="ketikkan nip / nama guru" name="cari">
+				<label>Cari Berdasar Nis / Nama Siswa </label>
+				<input type="text" class="form-control" placeholder="Search" name="cari">
 			</div>
-			<button data-toggle="tooltip" data-placement="top" title="Tooltip on top" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Cari</button>	
+			<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Cari</button>	
 		</form>
 	</div>
 	<div class="panel-body">
@@ -45,23 +43,23 @@
 			<thead>
 				<tr>
 					<th width=10>No.</th>
-					<th width=225>Kode Guru</th>
+					<th width=150>NIS</th>
 					<th width=500>Nama</th>
 					<th width=20>JK</th>
-					<th width=100>Status</th>
-					<th colspan="3">Aksi</th>
+					<th width=100>Kelas</th>
+					<th colspan=3>Aksi</th>
 				</tr>
 			</thead>
-			<?php $no=0; foreach($guru as $row ): $no++;?>
+			<?php $no=0; foreach($siswa as $row ): $no++;?>
+			<?php 	$nama=$row->nama_siswa;
+					$id=$row->nis;?>
 			<tr>
 				<td><?php echo ($no+$page);?></td>
-				<td><?php echo $row->id_guru;?></td>
-				<td><?php echo $row->nama_guru;?></td>
+				<td><?php echo $id;?></td>
+				<td><?php echo $row->nama_siswa;?></td>
 				<td><?php echo $row->jenis_kelamin;?></td>
-				<td><?php echo $row->status;?></td>
-				<?php $nama=$row->nama_guru;
-						$id=$row->id_guru;?>
-				<td width=15><a href="<?php echo site_url('guru/detail/'.$id);?>"
+				<td><?php echo "kelasnya?";?></td>
+				<td width=15><a href="<?php echo site_url('siswa/detail/'.$id);?>"
 						class='tooltipsku' 
 						data-toggle='tooltip' 
 						data-placement='top' 
@@ -70,7 +68,7 @@
 						<i class='glyphicon glyphicon-zoom-in'></i>
 					</a>
 				</td>
-				<td width=15><a href="<?php echo site_url('guru/edit/'.$id);?>"
+				<td width=15><a href="<?php echo site_url('siswa/edit/'.$row->nis);?>"
 						class='tooltipsku' 
 						data-toggle='tooltip' 
 						data-placement='top' 
@@ -79,7 +77,7 @@
 						<i class='glyphicon glyphicon-edit'></i>
 					</a>
 				</td>
-				<td width=15><a href="<?php echo site_url('guru/hapus/'.$id);?>"
+				<td width=15><a href="<?php echo site_url('siswa/hapus/'.$id);?>"
 						class='tooltipsku' 
 						data-toggle='tooltip' 
 						data-placement='top' 

@@ -1,18 +1,18 @@
-<div class="panel panel-default">
+<div class="panel panel-info">
 	<!--panel header-->
 	<div class="panel-heading">
 		<h4 class="panel-title">
 			<span class="glyphicon glyphicon-folder-close"/> 
-			</span> &nbsp <a href="<?php echo site_url('anggota');?>"> Siswa </a>  
+			</span> &nbsp <a href="<?php echo site_url('siswa');?>"> Siswa </a>  
 			<span class="glyphicon glyphicon-chevron-right"/>
-			</span> &nbsp <a href="<?php echo site_url('anggota/cari');?>"> Cari </a> 
+			</span> &nbsp <a href="<?php echo site_url('siswa/cari');?>"> Cari </a> 
 		</h4>
     </div>
 	
 	<!--bawah panel / tambah dan cari-->
 	<div class="well well-sm">
-		<a href="<?php echo site_url('anggota/tambah');?>" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Tambah</a>
-		<form class="navbar-form navbar-right" role="search" action="<?php echo site_url('anggota/cari');?>" method="post">
+		<a href="<?php echo site_url('siswa/tambah');?>" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Tambah</a>
+		<form class="navbar-form navbar-right" role="search" action="<?php echo site_url('siswa/cari');?>" method="post">
 			<div class="form-group">
 				<label>Cari Siswa </label>
 				<input type="text" class="form-control" placeholder="masukkan nis atau nama" name="cari">
@@ -35,16 +35,16 @@
 					<th colspan="2">Aksi</th>
 				</tr>
 			</thead>
-			<?php $no=0; foreach($anggota as $row ): $no++;?>
+			<?php $no=0; foreach($siswa as $row ): $no++;?>
 			<tr>
 				<td><?php echo $no;?></td>
-				<!--<td><img src="<?php echo base_url("assets/img/anggota/".$row->image);?>" height="100px" width="100px"></img></td>-->
+				<!--<td><img src="<?php echo base_url("assets/img/siswa/".$row->image);?>" height="100px" width="100px"></img></td>-->
 				<td><?php echo $row->nis;?></td>
 				<td><?php echo $row->nama;?></td>
 				<td><?php echo $row->jk;?></td>
 				<!--<td><?php echo $row->ttl;?></td>-->
 				<td><?php echo $row->kelas;?></td>
-				<td><a href="<?php echo site_url('anggota/edit/'.$row->nis);?>"><i class="glyphicon glyphicon-edit"></i></a></td>
+				<td><a href="<?php echo site_url('siswa/edit/'.$row->nis);?>"><i class="glyphicon glyphicon-edit"></i></a></td>
 				<td><a href="#" class="hapus" kode="<?php echo $row->nis;?>"><i class="glyphicon glyphicon-trash"></i></a></td>
 			</tr>
 			<?php endforeach;?>
@@ -66,12 +66,12 @@
             var kode=$("#idhapus").val();
             
             $.ajax({
-                url:"<?php echo site_url('anggota/hapus');?>",
+                url:"<?php echo site_url('siswa/hapus');?>",
                 type:"POST",
                 data:"kode="+kode,
                 cache:false,
                 success:function(html){
-                    location.href="<?php echo site_url('anggota/index/delete_success');?>";
+                    location.href="<?php echo site_url('siswa/index/delete_success');?>";
                 }
             });
         });

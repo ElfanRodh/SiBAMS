@@ -1,11 +1,11 @@
 <?php
-class Anggota extends CI_Controller{
+class Siswa extends CI_Controller{
     private $limit=20;
     
 	function __construct(){
         parent::__construct();
         $this->load->library(array('template','pagination','form_validation','upload'));
-        $this->load->model('m_anggota');
+        $this->load->model('m_siswa');
         
         if(!$this->session->userdata('username')){
             redirect('web');
@@ -18,14 +18,14 @@ class Anggota extends CI_Controller{
         if(empty($order_type)) $order_type='asc';
         
         //load data
-        $data['anggota']	=$this->m_anggota->semua($this->limit,$offset,$order_column,$order_type)->result();
 		$data['menu']		="menu.php";		//menu sisi kiri
-		$data['title']		="Siswa"; 	//judul
-        $data['content']	="anggota/tampil.php"; //konten
+		$data['title']		="Siswa"; 			//judul
+        $data['content']	="siswa/index.php"; //konten
+        $data['siswa']		=$this->m_siswa->semua($this->limit,$offset,$order_column,$order_type)->result();
         
 		//pagination atau pengalamatan
-        $config['base_url']		=site_url('anggota/index/');
-        $config['total_rows']	=$this->m_anggota->jumlah();
+        $config['base_url']		=site_url('siswa/index/');
+        $config['total_rows']	=$this->m_siswa->jumlah();
         $config['per_page']		=$this->limit;
         $config['uri_segment']	=3;
 		
@@ -44,9 +44,11 @@ class Anggota extends CI_Controller{
 		$config['first_tagl_close'] = "</li>";
 		$config['last_tag_open'] = "<li>";
 		$config['last_tagl_close'] = "</li>";
-
+		
+		//parser
         $this->pagination->initialize($config);
-        $data['pagination']		=$this->pagination->create_links();        
+        $data['pagination']		=$this->pagination->create_links();  
+		$data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         
 		//message atau tampilan pesan
         if($this->uri->segment(3)=="delete_success")
@@ -59,14 +61,14 @@ class Anggota extends CI_Controller{
     }
     
     function edit($id){
-        $data['title']="Edit Data Anggota";
+        $data['title']="Edit Siswa";
 		$data['menu']		="menu.php";		//menu sisi kiri
-		$data['content']="anggota/edit.php";
+		$data['content']="siswa/edit.php";
         $this->_set_rules();
         if($this->form_validation->run()==true){
             $nis=$this->input->post('nis');
             //setting konfiguras upload image
-            $config['upload_path'] 		= './assets/img/anggota/';
+            $config['upload_path'] 		= './assets/img/siswa/';
 			$config['allowed_types'] 	= 'gif|jpg|png';
 			$config['max_size']			= '1000';
 			$config['max_width']  		= '2000';
@@ -87,87 +89,79 @@ class Anggota extends CI_Controller{
                 'image'=>$gambar
             );
             //update data angggota
-            $this->m_anggota->update($nis,$info);
+            $this->m_siswa->update($nis,$info);
             
             //tampilkan pesan
             $data['message']="<div class='alert alert-success'>Data Berhasil diupdate</div>";
             
-            //tampilkan data anggota 
-            $data['anggota']=$this->m_anggota->cek($id)->row_array();
+            //tampilkan data siswa
+            $data['siswa']=$this->m_siswa->cek($id)->row_array();
             $this->load->view('admin/template',$data);
         }else{
-            $data['anggota']=$this->m_anggota->cek($id)->row_array();
+            $data['siswa']=$this->m_siswa->cek($id)->row_array();
             $data['message']="";
             $this->load->view('admin/template',$data);
         }
     }    
     
     function tambah(){
-        $data['title']="Tambah Data Anggota";		
 		$data['menu']		="menu.php";		//menu sisi kiri
-		$data['content']="anggota/tambah.php";
-        $this->_set_rules();
-        if($this->form_validation->run()==true){
-            $nis=$this->input->post('nis');
-            $cek=$this->m_anggota->cek($nis);
-            if($cek->num_rows()>0){
-                $data['message']="<div class='alert alert-warning'>Nis sudah digunakan</div>";
-                $this->load->view('admin/template',$data);
-            }else{
-                //setting konfigurasi upload image
-                $config['upload_path'] 	= base_url().'assets/img/anggota/';
-				$config['allowed_types']= 'gif|jpg|png';
-				$config['max_size']		= '1000';
-				$config['max_width']  	= '2000';
-				$config['max_height']  	= '1024';
-                
-                $this->upload->initialize($config);
-                if(!$this->upload->do_upload('gambar')){
-                    $gambar="";
-                }else{
-                    $gambar=$this->upload->file_name;
-                }
-                
-                $info=array(
-                    'nis'=>$this->input->post('nis'),
-                    'nama'=>$this->input->post('nama'),
-                    'jk'=>$this->input->post('jk'),
-                    'ttl'=>$this->input->post('ttl'),
-                    'kelas'=>$this->input->post('kelas'),
-                    'image'=>$gambar
-                );
-                $this->m_anggota->simpan($info);
-                redirect('anggota');
-            }
-        }else{
-            $data['message']="";
-            $this->load->view('admin/template',$data);
-        }
+        $data['title']		="Tambah siswa";		
+		$data['content']="siswa/tambah.php";   
+		$this->load->view('admin/template',$data);
     }    
+	
+	function tambah_proses(){	
+		$id=$this->input->post('nis'); 	// mendapatkan input dari kode
+		$cek=$this->m_siswa->cek($id); 			// cek kode di database
+		if($cek->num_rows()>0){ 				// jika kode sudah ada, maka tampilkan pesan
+			$this->session->set_flashdata('message','NIS siswa sudah ada!');
+			redirect('siswa/tambah');
+		}else { 								// jika kode buku belum ada, maka simpan
+			$info=array(
+				'nis'=>$id,
+				'nama_siswa'=>$this->input->post('nama'),
+				'jenis_kelamin'=>$this->input->post('jk'),
+				'tempat_lahir'=>$this->input->post('tempat'),
+				'tgl_lahir'=>$this->input->post('tl'),
+				'agama'=>$this->input->post('agama'),
+				'alamat_asli'=>$this->input->post('alamat_asli'),
+				'alamat_tinggal'=>$this->input->post('alamat_tinggal'),
+				'phone'=>$this->input->post('telepon'),
+				'sekolah_asal'=>$this->input->post('sekolah_asal'),
+				'tahun_masuk'=>$this->input->post('tahun_masuk'),
+				'nama_ibu'=>$this->input->post('nama_ibu'),
+				'nama_bapak'=>$this->input->post('nama_bapak')
+			);
+			$this->m_siswa->simpan($info);
+			$this->session->set_flashdata('m_sukses','Data siswa berhasil ditambahkan!');
+			redirect('siswa');
+		}
+    }
     
     function hapus(){
         $kode=$this->input->post('kode');
 		$data['menu']		="menu.php";		//menu sisi kiri
-        $detail=$this->m_anggota->cek($kode)->result();
+        $detail=$this->m_siswa->cek($kode)->result();
 		foreach($detail as $det):
-			unlink("assets/img/anggota/".$det->image);
+			unlink("assets/img/siswa/".$det->image);
 		endforeach;
-			$this->m_anggota->hapus($kode);
+			$this->m_siswa->hapus($kode);
     }
     
     function cari(){
-        $data['title']="Pencarian";
+        $data['title']="Cari Siswa";
 		$data['menu']		="menu.php";		//menu sisi kiri
-		$data['content']="anggota/cari.php";
+		$data['content']="siswa/cari.php";
         $cari=$this->input->post('cari');
-        $cek=$this->m_anggota->cari($cari);
+        $cek=$this->m_siswa->cari($cari);
         if($cek->num_rows()>0){
             $data['message']="";
-            $data['anggota']=$cek->result();
+            $data['siswa']=$cek->result();
             $this->load->view('admin/template',$data);
         }else{
             $data['message']="<div class='alert alert-success'>Data tidak ditemukan</div>";
-            $data['anggota']=$cek->result();
+            $data['siswa']=$cek->result();
             $this->load->view('admin/template',$data);
         }
     }

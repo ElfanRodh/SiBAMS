@@ -41,6 +41,77 @@
 		<?php
 		}		
 		?>
-		<em> mestinya diisi dengan rekap data siswa belum bayar, dll </em>
+		<em>siswa aktif</em>
+		<table class="table table-hover table-responsive table-bordered">
+			<thead>
+				<tr>
+					<th rowspan=2 width=50>No<br>.</th>
+					<th rowspan=2 width=450>Kelas<br>.</th>
+					<th rowspan=2 width=125>Jumlah <br>Siswa</th>
+					<th colspan=2 width=150>Status Bayar</th>
+				</tr>
+				<tr>
+					<th>Belum</th>
+					<th>Sudah</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>1</td>
+				<td>XI TKJ</td>
+				<td>bilangan</td>
+				<td><a href=#
+						class='tooltipsku' 
+						data-toggle='tooltip' 
+						data-placement='top' 
+						title="<?php echo 'detail belum bayar';?>"
+						>
+						bilangan</i>
+					</a></td>
+				<td><a href=#
+						class='tooltipsku' 
+						data-toggle='tooltip' 
+						data-placement='top' 
+						title="<?php echo 'detail sudah bayar';?>"
+						>
+						bilangan</i>
+					</a></td>
+			</tr>
+		</table>
+		<em>siswa tidak aktif</em>
+		<table class="table table-hover table-responsive table-bordered">
+			<thead>
+				<tr>
+					<th rowspan=2 width=50>No<br>.</th>
+					<th rowspan=2 width=450>Kelas<br>.</th>
+					<th rowspan=2 width=125>Jumlah <br>Siswa</th>
+					<th colspan=2 width=150>Status Bayar</th>
+				</tr>
+				<tr>
+					<th>Belum</th>
+					<th>Sudah</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>1</td>
+				<td>XI TKJ</td>
+				<td>bilangan</td>
+				<td><a href=#
+						class='tooltipsku' 
+						data-toggle='tooltip' 
+						data-placement='top' 
+						title="<?php echo 'detail belum bayar';?>"
+						>
+						bilangan</i>
+					</a></td>
+				<td><a href=#
+						class='tooltipsku' 
+						data-toggle='tooltip' 
+						data-placement='top' 
+						title="<?php echo 'detail sudah bayar';?>"
+						>
+						bilangan</i>
+					</a></td>
+			</tr>
+		</table>
 	</div>
 </div>

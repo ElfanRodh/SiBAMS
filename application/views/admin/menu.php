@@ -1,5 +1,5 @@
 <div class="panel-group" id="accordion">
-	<div class="panel panel-default">
+	<div class="panel panel-info">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
@@ -21,7 +21,12 @@
 					</tr>
 					<tr>
 						<td>
-							<span class="glyphicon glyphicon-user"></span> <a href="<?php echo site_url('anggota');?>">Siswa</a>
+							<span class="glyphicon glyphicon-paperclip"></span> <a href="<?php echo site_url('kelas');?>">Kelas</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="glyphicon glyphicon-user"></span> <a href="<?php echo site_url('siswa');?>">Siswa</a>
 						</td>
 					</tr>
 					<tr>
@@ -33,7 +38,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-info">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-info-sign">
@@ -45,24 +50,19 @@
 				<table class="table">
 					<tr>
 						<td>
-							<span class="glyphicon glyphicon-usd"></span><a href="<?php echo site_url('peminjaman');?>"> Daftar siswa tahun ini</a></span>
+							<span class="glyphicon glyphicon-usd"></span><a href="<?php echo site_url('peminjaman');?>"> Siswa tahun ini</a></span>
 						</td>
 					</tr>
 					<tr>
 						<td>
-						   <span class="glyphicon glyphicon-import"></span> <a href="<?php echo site_url('pengembalian');?>"> Daftar Siswa Belum Bayar</a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-						   <span class="glyphicon glyphicon-export"></span> <a href="<?php echo site_url('pengembalian');?>"> Peminjaman</a>
+						   <span class="glyphicon glyphicon-import"></span> <a href="<?php echo site_url('pengembalian');?>"> Siswa blm bayar</a>
 						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-info">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-retweet	">
@@ -91,7 +91,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-info">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file">
@@ -125,7 +125,7 @@
 			</div>
 		</div>
 	</div>							
-	<div class="panel panel-default">
+	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a href="<?php echo site_url('dashboard/logout');?>"><span class="glyphicon glyphicon-off">

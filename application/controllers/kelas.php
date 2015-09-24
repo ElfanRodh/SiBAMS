@@ -1,5 +1,5 @@
 <?php
-class Guru extends CI_Controller{
+class Kelas extends CI_Controller{
     private $limit=10;
     
     function __construct(){
@@ -19,13 +19,13 @@ class Guru extends CI_Controller{
         
 		//load data
         $data['menu']		="menu.php";		//menu sisi kiri
-		$data['title']		="guru"; 			//judul
-        $data['content']	="guru/index.php"; 	//konten
-        $data['guru']		=$this->m_guru->semua($this->limit,$offset,$order_column,$order_type)->result();
+		$data['title']		="kelas"; 			//judul
+        $data['content']	="kelas/index.php"; 	//konten
+        //$data['siswa']		=$this->m_kelas->semua($this->limit,$offset,$order_column,$order_type)->result();
         
 		//pagination atau pengalamatan
 		$config['base_url']		=site_url('guru/index/');
-        $config['total_rows']	=$this->m_guru->jumlah();
+        //$config['total_rows']	=$this->m_kelas->jumlah();
         $config['per_page']		=$this->limit;
         $config['uri_segment']	=3;
         

@@ -3,7 +3,7 @@ class Web extends CI_Controller{
     
     function __construct(){
         parent::__construct();
-        $this->load->model(array('m_buku','m_anggota','m_petugas'));
+        $this->load->model(array('m_buku','m_siswa','m_petugas'));
         if($this->session->userdata('username')){
             redirect('dashboard');
         }

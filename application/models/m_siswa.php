@@ -1,6 +1,6 @@
 <?php
-class M_anggota extends CI_Model{
-    private $table="anggota";
+class M_siswa extends CI_Model{
+    private $table="siswa";
     private $primary="nis";
     
     function semua($limit=10,$offset=0,$order_column='',$order_type='asc'){
@@ -17,8 +17,7 @@ class M_anggota extends CI_Model{
     
     function cek($kode){
         $this->db->where($this->primary,$kode);
-        $query=$this->db->get($this->table);
-        
+        $query=$this->db->get($this->table);        
         return $query;
     }
     

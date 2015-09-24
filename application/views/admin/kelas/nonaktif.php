@@ -1,16 +1,16 @@
-<div class="panel panel-info">
+<div class="panel panel-default">
 	<!--panel header-->
 	<div class="panel-heading">
 		<h4 class="panel-title">
 			<span class="glyphicon glyphicon-star-empty"/></span> 
-			<a href="<?php echo site_url('guru');?>"> <strong>Guru Aktif </strong></a>
+			<a href="<?php echo site_url('guru/nonaktif');?>"> <strong>Guru Nonaktif</strong></a>
 		</h4>
     </div>
 	
 	<!--bawah panel / tambah dan cari-->
 	<div class="well well-sm">
 		<a href="<?php echo site_url('guru/tambah');?>" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Tambah</a>
-		<a href="<?php echo site_url('guru/nonaktif');?>" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Lihat Data Nonaktif</a>
+		<a href="<?php echo site_url('guru');?>" class="btn btn-success"><i class="glyphicon glyphicon-star-empty"></i> Lihat Data Aktif</a>
 		<form class="navbar-form navbar-right" role="search" action="<?php echo site_url('guru/cari');?>" method="post">
 			<div class="form-group">
 				<label>Cari Guru</label>
@@ -54,27 +54,27 @@
 			</thead>
 			<?php $no=0; foreach($guru as $row ): $no++;?>
 			<tr>
-				<td><?php echo ($no+$page);?></td>
+				<td><?php echo $no;?></td>
 				<td><?php echo $row->id_guru;?></td>
 				<td><?php echo $row->nama_guru;?></td>
 				<td><?php echo $row->jenis_kelamin;?></td>
 				<td><?php echo $row->status;?></td>
 				<?php $nama=$row->nama_guru;
 						$id=$row->id_guru;?>
-				<td width=15><a href="<?php echo site_url('guru/detail/'.$id);?>"
+				<td width=15><a disabled href="<?php echo site_url('guru/detail_nonaktif/'.$id);?>"
 						class='tooltipsku' 
 						data-toggle='tooltip' 
 						data-placement='top' 
-						title="<?php echo 'detail '.$nama;?>"
+						title="<?php echo 'detail non aktif '.$nama;?>"
 						>
 						<i class='glyphicon glyphicon-zoom-in'></i>
 					</a>
 				</td>
-				<td width=15><a href="<?php echo site_url('guru/edit/'.$id);?>"
+				<td width=15><a href="#"
 						class='tooltipsku' 
 						data-toggle='tooltip' 
 						data-placement='top' 
-						title="<?php echo 'edit '.$nama;?>"
+						title="pengeditan hanya berlaku untuk status pns/gtt!"
 						>
 						<i class='glyphicon glyphicon-edit'></i>
 					</a>
@@ -83,9 +83,9 @@
 						class='tooltipsku' 
 						data-toggle='tooltip' 
 						data-placement='top' 
-						title="<?php echo 'nonaktifkan '.$nama;?>"
+						title="<?php echo 'aktifkan '.$nama;?>"
 						>
-						<i class='glyphicon glyphicon-trash'></i>
+						<i class='glyphicon glyphicon-star-empty'></i>
 					</a>
 				</td>
 			</tr>
