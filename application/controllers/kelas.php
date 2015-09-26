@@ -5,27 +5,28 @@ class Kelas extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->library(array('template','form_validation','pagination','upload'));
-        $this->load->model('m_guru');
+        $this->load->model('m_kelas');
         
         if(!$this->session->userdata('username')){
             redirect('web');
         }
     }
     
-    function index($offset=0,$order_column='id_guru',$order_type='asc'){
+    function index($offset=0,$order_column='id_kelas',$order_type='dsc'){
         if(empty($offset)) $offset=0;
-        if(empty($order_column)) $order_column='id_guru';
+        if(empty($order_column)) $order_column='id_kelas';
         if(empty($order_type)) $order_type='asc';
         
 		//load data
         $data['menu']		="menu.php";		//menu sisi kiri
 		$data['title']		="kelas"; 			//judul
         $data['content']	="kelas/index.php"; 	//konten
-        //$data['siswa']		=$this->m_kelas->semua($this->limit,$offset,$order_column,$order_type)->result();
+        $data['kelas']		=$this->m_kelas->semua($this->limit,$offset,$order_column,$order_type)->result();
+		// $data['jurusan'] 	=$this->m_kelas->data_jurusan();
         
 		//pagination atau pengalamatan
-		$config['base_url']		=site_url('guru/index/');
-        //$config['total_rows']	=$this->m_kelas->jumlah();
+		$config['base_url']		=site_url('kelas/index/');
+        $config['total_rows']	=$this->m_kelas->jumlah();
         $config['per_page']		=$this->limit;
         $config['uri_segment']	=3;
         
@@ -166,6 +167,37 @@ class Kelas extends CI_Controller{
 		$data['content']="guru/tambah.php";        
 		$this->load->view('admin/template',$data);
     }
+	
+	function tambah_angkatan(){
+		$data['menu']	="menu.php";		//menu sisi kiri
+		$data['title']	="Angatan tambah"; 		//judul
+		$data['content']="kelas/tambah_angkatan.php";
+		$data['jurusan'] = $this->m_kelas->data_jurusan();
+		$data['walikelas'] = $this->m_kelas->data_walikelas();
+		$this->load->view('admin/template',$data);
+    }
+	
+	function tambah_angkatan_proses(){
+		$tahun=$this->input->post('tahun'); 
+		$jurusan=$this->input->post('jurusan'); 
+		$walikelas=$this->input->post('walikelas'); 
+		$id=$tahun.$jurusan; 		// mendapatkan input dari kode
+		$cek=$this->m_kelas->cek($id); 			// cek kode di database
+		if($cek->num_rows()>0){ 				// jika kode sudah ada, maka tampilkan pesan
+			$this->session->set_flashdata('message','Id kelas sudah ada!');
+			redirect('kelas/tambah_angkatan');
+		}else { 								// jika kode buku belum ada, maka simpan
+			$info=array(
+				'id_kelas'=>$id,
+				'id_jurusan'=>$jurusan,
+				'tahun_ajaran'=>$tahun,
+				'walikelas'=>$walikelas
+			);
+			$this->m_kelas->simpan($info);
+			$this->session->set_flashdata('m_sukses','Data kelas berhasil ditambahkan!');
+			redirect('kelas');
+		}
+	}
 	
     function tambah_proses(){	
 		$id=$this->input->post('id_guru'); 		// mendapatkan input dari kode

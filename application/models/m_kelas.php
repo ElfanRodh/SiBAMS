@@ -4,18 +4,13 @@ class M_kelas extends CI_Model{
     private $primary="id_kelas";
     private $state="status";
 	
-	function semua($limit=10,$offset=0,$order_column='',$order_type='asc'){
-        if(empty($order_column) || empty($order_type)){
-            $this->db->like($this->state,'pns');
-			$this->db->or_like($this->state,'gtt');
-            $this->db->order_by($order_column,$order_type);
-		}
-        else{
-			$this->db->like($this->state,'pns');
-			$this->db->or_like($this->state,'gtt');
-            $this->db->order_by($order_column,$order_type);
-		}
-        return $this->db->get($this->table,$limit,$offset);
+	function semua($limit=10,$offset=0,$order_column='',$order_type='dsc'){
+        // $data=$this->db->get($this->table,$limit,$offset);
+        // return $data;
+		$this->db->select('paket_pekerjaan.Kode_Pkt_Pekerjaan,paket_pekerjaan.Nama_Pkt_Pkrjaan,paket_pekerjaan.Nilai,bidang.nama_bidang,periode.Nama_Periode')
+		->join('bidang','bidang.id_bidang=paket_pekerjaan.id_bidang')
+		->join('periode','periode.id_periode=paket_pekerjaan.ID_Periode');
+		return $this->db->get('paket_pekerjaan')->result();
     }
 	
 	function semua_non($limit=10,$offset=0,$order_column='',$order_type='asc'){
@@ -75,4 +70,16 @@ class M_kelas extends CI_Model{
 		$this->db->or_like("nama_guru",$cari);
         return $this->db->get($this->table);
     }
+	
+	function data_walikelas()
+	{
+		$q = $this->db->query("select * from tbl_guru order by id_guru");
+		return $q;
+	}
+	
+	function data_jurusan()
+	{
+		$q = $this->db->query("select * from jurusan order by id_jurusan");
+		return $q;
+	}
 }
