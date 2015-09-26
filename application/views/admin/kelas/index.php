@@ -40,10 +40,10 @@
 					<th width=50>No.</th>
 					<th width=100>Id Kelas</th>
 					<th width=100>Tahun Ajaran</th>
-					<th width=100>Jurusan</th>
+					<th width=250>Jurusan</th>
 					<th width=100>Status</th>
 					<th width=100>Jumlah Siswa</th>
-					<th width=400>Walikelas</th>
+					<th width=250>Walikelas</th>
 					<th colspan=3>Aksi</th>
 				</tr>
 			</thead>
@@ -52,10 +52,10 @@
 					<td><?php echo ($no+$page);?></td>
 					<td><?php echo $row->id_kelas;?></td>
 					<td><?php echo $row->tahun_ajaran;?></td>
-					<td><?php echo $row->id_jurusan;?></td>
-					<td><?php echo $row->status;?></td>
+					<td><?php echo $row->nama_jurusan;?></td>
+					<td><?php echo $row->nama_status;?></td>
 					<td><?php echo "bilangan";?></td>
-					<td><?php echo $row->walikelas;?></td>
+					<td><?php echo $row->nama_guru;?></td>
 					<td width=15><a href=""
 							class='tooltipsku' 
 							data-toggle='tooltip' 

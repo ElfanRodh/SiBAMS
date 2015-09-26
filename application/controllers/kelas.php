@@ -21,7 +21,7 @@ class Kelas extends CI_Controller{
         $data['menu']		="menu.php";		//menu sisi kiri
 		$data['title']		="kelas"; 			//judul
         $data['content']	="kelas/index.php"; 	//konten
-        $data['kelas']		=$this->m_kelas->semua($this->limit,$offset,$order_column,$order_type)->result();
+        $data['kelas']		=$this->m_kelas->semua()->result();
 		// $data['jurusan'] 	=$this->m_kelas->data_jurusan();
         
 		//pagination atau pengalamatan
