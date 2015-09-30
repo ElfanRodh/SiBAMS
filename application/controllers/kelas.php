@@ -170,7 +170,7 @@ class Kelas extends CI_Controller{
 	
 	function tambah_angkatan(){
 		$data['menu']	="menu.php";		//menu sisi kiri
-		$data['title']	="Angatan tambah"; 		//judul
+		$data['title']	="Tambah Kelas"; 		//judul
 		$data['content']="kelas/tambah_angkatan.php";
 		$data['jurusan'] = $this->m_kelas->data_jurusan();
 		$data['walikelas'] = $this->m_kelas->data_walikelas();

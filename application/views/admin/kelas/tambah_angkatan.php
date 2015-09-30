@@ -5,7 +5,7 @@
 			<span class="glyphicon glyphicon-paperclip"></span>
 			<a href="<?php echo site_url('guru');?>"> <strong>Kelas </strong></a>
 			<span class="glyphicon glyphicon-chevron-right"/>
-			</span><a href="#"> <strong>Tambah Angkatan</strong></a> 
+			</span><a href="#"> <strong>Tambah</strong></a> 
 		</h4>
     </div>
 	<div class="panel-body">
